@@ -40,7 +40,11 @@ public class Main {
             adminScreen.setVisible(true);
 
             // TODO: Launch RecruiterScreens x3 (Lance)
-            // TODO: Launch CandidateScreens x6 (Railee)
+            for (int i = 1; i <= 6; i++) {
+                CandidateScreen candidateScreen = new CandidateScreen(system, timer);
+                                candidateScreen.setLocation(100 + (i * 30), 100 + (i * 30)); 
+                                candidateScreen.setVisible(true);
+            }
         });
     }
 }
