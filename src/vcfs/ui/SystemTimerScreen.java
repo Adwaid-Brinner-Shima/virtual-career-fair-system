@@ -49,7 +49,7 @@ public class SystemTimerScreen extends JFrame implements TimerListener {
     private void buildUI() {
         setTitle("VCFS — System Timer");
         setSize(420, 380);
-        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);
 

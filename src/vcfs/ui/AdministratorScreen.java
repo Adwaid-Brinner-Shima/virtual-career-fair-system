@@ -57,7 +57,7 @@ public class AdministratorScreen extends JFrame implements TimerListener {
     private void buildUI() {
         setTitle("VCFS — Administrator");
         setSize(820, 640);
-        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
         // Root layout
