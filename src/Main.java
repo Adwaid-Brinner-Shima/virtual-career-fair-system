@@ -1,6 +1,7 @@
 import vcfs.model.VCFSystem;
 import vcfs.timer.SystemTimer;
 import vcfs.ui.AdministratorScreen;
+import vcfs.ui.CandidateScreen;
 import vcfs.ui.SystemTimerScreen;
 
 import javax.swing.*;
