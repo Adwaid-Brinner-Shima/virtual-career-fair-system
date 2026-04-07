@@ -21,6 +21,7 @@ public class VCFSystem {
     private List<Candidate> candidates;
     private List<AuditLog> auditLogs;
     private List<Notification> notifications;
+    private FairLive fairLive;
 
     public VCFSystem() {
         this.state = SystemState.DORMANT;
@@ -56,11 +57,13 @@ public class VCFSystem {
                 if (currentTime != null && !currentTime.isBefore(startTime)) {
                     state = SystemState.FAIR_LIVE;
                     openAllRooms();
+                    if (fairLive != null) { fairLive.startFair(); }
                     logEvent("System moved to FAIR_LIVE", "System");
                 }
                 break;
             case FAIR_LIVE:
                 if (currentTime != null && !currentTime.isBefore(endTime)) {
+                    if (fairLive != null) { fairLive.endFair(); }
                     closeAllRooms();
                     state = SystemState.DORMANT;
                     logEvent("Fair ended. System returned to DORMANT", "System");
@@ -140,4 +143,7 @@ public class VCFSystem {
     public List<Candidate> getCandidates() { return candidates; }
     public List<AuditLog> getAuditLogs() { return auditLogs; }
     public List<Notification> getNotifications() { return notifications; }
+
+    public FairLive getFairLive() { return fairLive; }
+    public void setFairLive(FairLive fairLive) { this.fairLive = fairLive; }
 }

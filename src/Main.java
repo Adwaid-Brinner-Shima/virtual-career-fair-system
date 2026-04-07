@@ -1,7 +1,9 @@
+import vcfs.model.FairLive;
 import vcfs.model.VCFSystem;
 import vcfs.timer.SystemTimer;
 import vcfs.ui.AdministratorScreen;
 import vcfs.ui.CandidateScreen;
+import vcfs.ui.RecruiterScreen;
 import vcfs.ui.SystemTimerScreen;
 
 import javax.swing.*;
@@ -40,11 +42,22 @@ public class Main {
             AdministratorScreen adminScreen = new AdministratorScreen(system, timer);
             adminScreen.setVisible(true);
 
-            // TODO: Launch RecruiterScreens x3 (Lance)
+            // FairLive manages virtual rooms during the live fair
+            FairLive fairLive = new FairLive(system);
+            system.setFairLive(fairLive);
+
+            // Launch 3 Recruiter screens (Lance)
+            for (int i = 1; i <= 3; i++) {
+                RecruiterScreen recruiterScreen = new RecruiterScreen(system, timer, fairLive);
+                recruiterScreen.setLocation(60 + (i * 30), 60 + (i * 30));
+                recruiterScreen.setVisible(true);
+            }
+
+            // Launch 6 Candidate screens (Railee)
             for (int i = 1; i <= 6; i++) {
-                CandidateScreen candidateScreen = new CandidateScreen(system, timer);
-                                candidateScreen.setLocation(100 + (i * 30), 100 + (i * 30)); 
-                                candidateScreen.setVisible(true);
+                CandidateScreen candidateScreen = new CandidateScreen(system, timer, fairLive);
+                candidateScreen.setLocation(100 + (i * 30), 100 + (i * 30));
+                candidateScreen.setVisible(true);
             }
         });
     }

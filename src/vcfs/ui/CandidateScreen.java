@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Candidate-facing screen for the Virtual Career Fair System.
@@ -185,7 +186,19 @@ public class CandidateScreen extends JFrame implements TimerListener {
         int confirm = JOptionPane.showConfirmDialog(this, "Cancel this reservation?",
                 "Confirm", JOptionPane.YES_NO_OPTION);
         if (confirm != JOptionPane.YES_OPTION) return;
-        candidate.cancelReservation(active.get(row));
+        Reservation res = active.get(row);
+        Recruiter recruiter = res.getSlot().getRecruiter();
+        candidate.cancelReservation(res);
+
+        // notify the recruiter about the cancellation
+        Notification notice = new Notification(
+                UUID.randomUUID().toString(),
+                "Candidate " + candidate.getName() + " cancelled their appointment for '"
+                        + res.getSlot().getOffer().getTitle() + "'.",
+                recruiter.getName());
+        notice.send();
+        recruiter.addNotification(notice);
+
         system.logEvent("Reservation cancelled by " + candidate.getName(), candidate.getName());
         refreshReservations(); refreshSlots();
         CandidateUI.ok(this, "Reservation cancelled.");

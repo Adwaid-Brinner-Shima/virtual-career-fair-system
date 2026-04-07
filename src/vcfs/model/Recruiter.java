@@ -14,6 +14,7 @@ public class Recruiter {
     private String email;
     private List<Offer> offers;
     private List<AvailabilityBlock> availabilityBlocks;
+    private List<Notification> notifications;
 
     public Recruiter(String id, String name, String email) {
         this.id = id;
@@ -21,6 +22,7 @@ public class Recruiter {
         this.email = email;
         this.offers = new ArrayList<>();
         this.availabilityBlocks = new ArrayList<>();
+        this.notifications = new ArrayList<>();
     }
 
     /**
@@ -56,4 +58,10 @@ public class Recruiter {
     public List<Offer> getOffers() { return offers; }
 
     public List<AvailabilityBlock> getAvailabilityBlocks() { return availabilityBlocks; }
+
+    public void addNotification(Notification notification) {
+        notifications.add(notification);
+    }
+
+    public List<Notification> getNotifications() { return notifications; }
 }
